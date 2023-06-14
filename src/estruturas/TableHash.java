@@ -9,30 +9,17 @@ public class TableHash {
         tableHash = new String[M];
     }
 
-    public int hash(String key) {
-        int h = 0;
-        for (int i = 0; i < key.length(); i++) {
-            h = (31 * h + key.charAt(i)) % M;
-        }
-        return h;
+    public int hash(int key) {
+        return key % M;
     }
 
-    public void put(String key) {
+    public void put(int key, String value) {
         int i = hash(key);
-        while (tableHash[i] != null) {
-            i = (i + 1) % M;
-        }
-        tableHash[i] = key;
+        tableHash[i] = value;
     }
 
-    public String busca(String key) {
+    public String busca(int key) {
         int i = hash(key);
-        while (tableHash[i] != null) {
-            if (tableHash[i].equals(key)) {
-                return tableHash[i];
-            }
-            i = (i + 1) % M;
-        }
-        return null;
+        return tableHash[i];
     }
 }
